@@ -12,10 +12,10 @@ pub const JWT_SECRET: &[u8; 6] = b"secret"; // jwt key
 
 pub const STATIC_PATH: &str = "static"; // 静态文件路径
 
-pub const NOT_AUTH_PATH: [String; 5] = [ // 不需要鉴权的路径
+pub const NOT_AUTH_PATH: [&str; 5] = [ // 不需要鉴权的路径
     "/",
     "/login",
     "/logout",
     "/register",
-    "/doc"
-].map(|item| { item.to_string() });
+    "/doc",
+];

@@ -60,9 +60,9 @@ where
         let token = req.headers().get("token").unwrap_or(&HeaderValue::from_static("")).to_str().unwrap_or("").to_owned();
 
         // 将解析到的 用户数据 传递给后续的使用程序
-        if utils::constant::NOT_AUTH_PATH.contains(&path) || utils::common::validation_token(token) {
+        if utils::constant::NOT_AUTH_PATH.map(|item| { item.to_owned() }).contains(&path) || utils::common::validation_token(token.clone()) {
             // 获取方式：async fn handler(claims: Option<web::ReqData<utils::common::Claims>>) -> HttpResponse
-            req.extensions_mut().insert(utils::common::decode_token(token, None).unwrap().claims);
+            req.extensions_mut().insert(utils::common::decode_token(token.clone(), None).unwrap().claims);
 
             // req.extensions().insert(utils::common::decode_token(token, None).unwrap().claims);
             // req.extensions().get::<utils::common::Claims>();
@@ -71,7 +71,7 @@ where
         let fut = self.service.call(req);
 
         Box::pin(async move {
-            if utils::constant::NOT_AUTH_PATH.contains(&path) || utils::common::validation_token(token) {
+            if utils::constant::NOT_AUTH_PATH.map(|item| { item.to_owned() }).contains(&path) || utils::common::validation_token(token.clone()) {
                 let res = fut.await?;
                 Ok(res)
             } else {
