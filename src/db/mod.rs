@@ -1,3 +1,4 @@
+/// doc: https://www.mongodb.com/developer/languages/rust/rust-mongodb-frameworks
 pub mod models;
 
 use mongodb::{bson::doc, options::{IndexOptions, ClientOptions}, Client, Collection, IndexModel, ServerInfo, error};
