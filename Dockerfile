@@ -23,4 +23,4 @@ COPY --from=builder /usr/local/cargo/bin/${APP_NAME} ${WORKFILE}
 
 EXPOSE 3000
 
-ENTRYPOINT ["${WORKFILE}"]
+CMD ["${WORKFILE}"]
