@@ -56,6 +56,7 @@ async fn main() -> std::io::Result<()> {
                     .route("/", web::to(HttpResponse::Ok))
             })
     ***/
+    env_logger::init_from_env(env_logger::Env::new().default_filter_or("info")); // 日志格式: https://actix.rs/docs/middleware/#format
 
     HttpServer::new(move || {
         App::new()
