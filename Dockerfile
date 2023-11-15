@@ -12,9 +12,7 @@ WORKDIR $WORKDIR
 RUN cargo install --path .
 
 FROM debian:bullseye-slim
-RUN apt-get update && \
-    apt-get install -y extra-runtime-dependencies && \
-    rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install -y <extra-runtime-dependencies> rm -rf /var/lib/apt/lists/* # 额外的运行时依赖安装
 COPY --from=builder /usr/local/cargo/bin/${APP_NAME} /usr/local/bin/${APP_NAME}
 
 CMD ["${APP_NAME}"]
