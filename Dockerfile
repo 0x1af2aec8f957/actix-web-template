@@ -5,9 +5,10 @@ LABEL description="A Actix-Web Template"
 
 ENV APP_NAME=actix-web-template
 ENV WORKDIR=/usr/src/${APP_NAME}
-COPY --chown=777 . .
 
 WORKDIR $WORKDIR
+
+COPY --chown=777 . .
 
 RUN cargo install --path .
 
